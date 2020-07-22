@@ -5,6 +5,9 @@ import com.lhl.springboot.springbootdemo.entity.User;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author lhl
+ */
 public interface UserDao {
 
     /**

@@ -1,12 +1,17 @@
 package com.lhl.springboot.springbootdemo.controller;
 
+import java.util.logging.Logger;
+
 import com.lhl.springboot.springbootdemo.Dao.AdminDao;
 import com.lhl.springboot.springbootdemo.entity.AdminUser;
 import com.lhl.springboot.springbootdemo.service.AdminUserService;
 import com.lhl.springboot.springbootdemo.common.Result;
 import com.lhl.springboot.springbootdemo.common.ResultCheck;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 
 import javax.annotation.Resource;
-
+/**
+ * @author lhl
+ */
+@Api(tags = "admin",description = "admin")
 @RestController
 @RequestMapping("/users")
 public class AdminController{
@@ -28,6 +36,7 @@ public class AdminController{
     @Autowired
     AdminUserService adminUserService;
 
+    @ApiOperation(value = "login")
     @ResponseBody
     @RequestMapping(value="/login",method=RequestMethod.POST)
     public Result login(@RequestBody AdminUser admin){
@@ -44,15 +53,13 @@ public class AdminController{
             System.out.println("登录成功");
             String token = adminUserService.updateToken(nameCheck);
             System.out.println(token);
-            Result result = new Result(token);
-            return result;
+            return new Result(token);
         }else{
             System.out.println("登陆失败");
-            Result result = new Result("");
-            return result;
+            return new Result("");
         }
     }
-
+    @ApiOperation(value ="check")
     @RequestMapping(value="/check",method=RequestMethod.POST)
     public int check(@RequestBody ResultCheck res){
         AdminUser adminuser = new AdminUser();
