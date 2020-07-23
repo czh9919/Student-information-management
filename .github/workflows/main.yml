@@ -32,5 +32,5 @@ jobs:
     - name: cd and run
       run: 
         cd springboot-demo
-        mvn spring-boot:run
+        mvn compile
 
