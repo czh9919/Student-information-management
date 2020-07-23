@@ -29,8 +29,10 @@ jobs:
       with:
         java-version: 1.8
     # Runs a single command using the runners shell
-    - name: cd and run
+    - name: cd
       run: 
         cd springboot-demo
-        mvn spring-boot:run
+    - name: run
+      run:
+        mvn compile
 
