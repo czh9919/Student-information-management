@@ -31,6 +31,5 @@ jobs:
     # Runs a single command using the runners shell
     - name: cd and run
       run: 
-        cd springboot-demo
-        mvn spring-boot:run
+        cd springboot-demo && mvn compile clean verify
 
