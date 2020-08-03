@@ -16,6 +16,9 @@
         update tb_admin set status=#{number} where name=#{name};
     </update>
 
+    <insert id="register">
+        insert IGNORE into tb_admin(name,password) values (#{name },#{password})
+    </insert>
 
 
 

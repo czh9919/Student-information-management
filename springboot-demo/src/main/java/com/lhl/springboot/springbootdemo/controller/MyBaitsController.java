@@ -20,7 +20,10 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
-@Api(tags = "function",description = "功能")
+/**
+ * @author lhl
+ */
+@Api(tags = "function")
 @RestController
 public class MyBaitsController {
 
@@ -42,7 +45,7 @@ public class MyBaitsController {
 
     @ApiOperation(value = "展示所有人")
     @GetMapping("/users/querystudent")
-    public User queryStudent(String name){
+    public List<User> queryStudent(String name){
         User user = new User();
         user.setName(name);
         return userDao.findStudent(user);
@@ -51,7 +54,7 @@ public class MyBaitsController {
 
     @ApiOperation(value = "用ID查找人")
     @GetMapping("/users/queryStudentThroughNumber")
-    public User queryStudentThroughNum(String num){
+    public List<User> queryStudentThroughNum(String num){
         User user = new User();
         user.setStudentnumber(num);
         return userDao.findStudentThroughStudentNumber(user);

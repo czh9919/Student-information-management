@@ -22,14 +22,14 @@ public interface UserDao {
      * @param User
      * @return
      */
-    User findStudent(User User);
+    List<User> findStudent(User User);
 
     /**
      * 查询
      * @param User
      * @return
      */
-    User findStudentThroughStudentNumber(User User);
+    List<User> findStudentThroughStudentNumber(User User);
 
     /**
      * 删除

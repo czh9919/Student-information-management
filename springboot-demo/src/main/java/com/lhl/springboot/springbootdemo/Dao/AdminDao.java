@@ -22,8 +22,13 @@ public interface AdminDao{
      * @return
      */
     int updateLoginToken(String name,int number);
-
-
+    /**
+     * 返回数据列表
+     * @param name
+     * @param password
+     * @return success or not
+     */
+    int register(String name,String password);
 
 }
 
