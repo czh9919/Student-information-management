@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author lhl
+ */
 @Controller
 public class IndexController {
 

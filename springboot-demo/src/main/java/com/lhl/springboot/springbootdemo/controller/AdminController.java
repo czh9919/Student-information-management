@@ -13,11 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,7 +21,7 @@ import javax.annotation.Resource;
 /**
  * @author lhl
  */
-@Api(tags = "admin",description = "admin")
+@Api(tags = "admin")
 @RestController
 @RequestMapping("/users")
 public class AdminController{
@@ -35,6 +31,13 @@ public class AdminController{
 
     @Autowired
     AdminUserService adminUserService;
+
+    @ApiOperation(value="register")
+    @PostMapping(value = "register")
+    public boolean Register(String name,String password){
+        adminDao.register(name, password);
+        return true;
+    }
 
     @ApiOperation(value = "login")
     @ResponseBody
@@ -52,7 +55,6 @@ public class AdminController{
         if(name.equals(nameCheck) && password.equals(passwordCheck)){
             System.out.println("登录成功");
             String token = adminUserService.updateToken(nameCheck);
-            System.out.println(token);
             return new Result(token);
         }else{
             System.out.println("登陆失败");
@@ -66,13 +68,12 @@ public class AdminController{
         adminuser = adminDao.checkStatus();
         int checkToken = adminuser.getStatus();
         String token = checkToken+"";
-        if(res.getToken().indexOf(token) != -1){
+        if(res.getToken().contains(token)){
             return 1;
 
         }else{
             return 2;
         }
-
     }
 
 

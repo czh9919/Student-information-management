@@ -52,12 +52,6 @@ public class WebLogAspect{
         webLog.setSpendTime((int)(endTime-startTime));
         webLog.setUri(request.getRequestURI());
         webLog.setUrl(request.getRequestURL().toString());
-
-        Map<String,Object>logMap=new HashMap<>();
-        logMap.put("url",webLog.getUrl());
-        logMap.put("method",webLog.getMethod());
-        logMap.put("spend time",webLog.getSpendTime());
-        logMap.put("Description",webLog.getDescription());
         LOGGER.info("{}", JSONUtil.toJsonStr(webLog));
 
 
