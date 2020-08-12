@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -38,13 +40,13 @@ public class MyBaitsController {
     }
 
     @ApiOperation(value = "所有人")
-    @GetMapping("/users/query")
+    @PostMapping("/users/query")
     public List<User> queryAll(){
         return userDao.findAllUsers();
     }
 
     @ApiOperation(value = "展示所有人")
-    @GetMapping("/users/querystudent")
+    @PostMapping("/users/querystudent")
     public List<User> queryStudent(String name){
         User user = new User();
         user.setName(name);
@@ -53,7 +55,7 @@ public class MyBaitsController {
     }
 
     @ApiOperation(value = "用ID查找人")
-    @GetMapping("/users/queryStudentThroughNumber")
+    @PostMapping("/users/queryStudentThroughNumber")
     public List<User> queryStudentThroughNum(String num){
         User user = new User();
         user.setStudentnumber(num);
@@ -61,7 +63,7 @@ public class MyBaitsController {
     }
 
     @ApiOperation(value = "插入")
-    @GetMapping("/users/insert")
+    @PostMapping("/users/insert")
     public boolean insertUser(String name , String studentnumber){
         User user = new User();
         user.setName(name);
@@ -70,7 +72,7 @@ public class MyBaitsController {
     }
 
     @ApiOperation(value = "更新")
-    @GetMapping("/users/update")
+    @PostMapping("/users/update")
     public boolean updUser(Integer id,String name,String studentnumber){
         User user = new User();
         user.setId(id);
@@ -80,9 +82,9 @@ public class MyBaitsController {
     }
 
     @ApiOperation(value = "删除")
-    @GetMapping("/users/delete")
-    public boolean insert(Integer id) {
-        return userDao.deleteUser(id) > 0;
+    @PostMapping("/users/delete")
+    public boolean del(@RequestBody User user) {
+        return userDao.deleteUser(user.getId()) > 0;
     }
 
 
