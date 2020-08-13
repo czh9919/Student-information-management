@@ -41,8 +41,14 @@ public class MyBaitsController {
 
     @ApiOperation(value = "所有人")
     @PostMapping("/users/query")
-    public List<User> queryAll(){
-        return userDao.findAllUsers();
+    public List<User> queryAll(@RequestBody User user){
+        System.out.println(user.getName());
+        if (user.getName()=="") {
+            return userDao.findAllUsers();
+        }
+        else {
+            return userDao.findStudent(user);
+        }
     }
 
     @ApiOperation(value = "展示所有人")
