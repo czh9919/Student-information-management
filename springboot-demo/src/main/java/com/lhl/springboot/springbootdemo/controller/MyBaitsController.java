@@ -64,20 +64,13 @@ public class MyBaitsController {
 
     @ApiOperation(value = "插入")
     @PostMapping("/users/insert")
-    public boolean insertUser(String name , String studentnumber){
-        User user = new User();
-        user.setName(name);
-        user.setStudentnumber(studentnumber);
+    public boolean insertUser(@RequestBody User user){
         return userDao.insertUser(user) > 0;
     }
 
     @ApiOperation(value = "更新")
     @PostMapping("/users/update")
-    public boolean updUser(Integer id,String name,String studentnumber){
-        User user = new User();
-        user.setId(id);
-        user.setName(name);
-        user.setStudentnumber(studentnumber);
+    public boolean updUser(@RequestBody User user){
         return userDao.updUser(user) > 0;
     }
 
