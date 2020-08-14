@@ -59,16 +59,20 @@ public class AdminController{
     }
     @ApiOperation(value ="check")
     @RequestMapping(value="/check",method=RequestMethod.POST)
-    public int check(@RequestBody ResultCheck res){
+    public boolean check(@RequestBody ResultCheck res){
+        if (res.getToken()==""||res.getToken()==null) {
+            return false;
+        }
+        System.out.println(res.getToken());
         AdminUser adminuser;
         adminuser = adminDao.checkStatus("admin");
         int checkToken = adminuser.getStatus();
         String token = checkToken+"";
         if(res.getToken().contains(token)){
-            return 1;
+            return true;
 
         }else{
-            return 2;
+            return false;
         }
     }
 

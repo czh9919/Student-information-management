@@ -39,25 +39,16 @@ public class MyBaitsController {
         return "有这么多人在线：" + MyListener.count + "人";
     }
 
-    @ApiOperation(value = "所有人")
+    @ApiOperation(value = "展示所有人")
     @PostMapping("/users/query")
     public List<User> queryAll(@RequestBody User user){
         System.out.println(user.getName());
-        if (user.getName()=="") {
+        if (user.getName()=="" || user.getName()==null) {
             return userDao.findAllUsers();
         }
         else {
             return userDao.findStudent(user);
         }
-    }
-
-    @ApiOperation(value = "展示所有人")
-    @PostMapping("/users/querystudent")
-    public List<User> queryStudent(String name){
-        User user = new User();
-        user.setName(name);
-        return userDao.findStudent(user);
-
     }
 
     @ApiOperation(value = "用ID查找人")
