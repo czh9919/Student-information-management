@@ -54,9 +54,9 @@ jobs:
           password: ${{ secrets.PWD }}
           port: ${{ secrets.PORT }}
           script: |
-            docker stop $(docker ps --filter ancestor=${{ secrets.REGISTRY }} -q)
-            docker rm -f $(docker ps -a --filter ancestor=${{ secrets.REGISTRY }}:latest -q)
-            docker rmi -f $(docker images  ${{ secrets.REGISTRY }}:latest -q)
-            docker login --username=${{ secrets.USERNAME }} --password ${{ secrets.PASSWORD }} registry.cn-hangzhou.aliyuncs.com
-            docker pull ${{ secrets.REGISTRY }}:latest
-            docker run -d -p 9033:9033 ${{ secrets.REGISTRY }}:latest
+            sudo docker stop $(docker ps --filter ancestor=${{ secrets.REGISTRY }} -q)
+            sudo docker rm -f $(docker ps -a --filter ancestor=${{ secrets.REGISTRY }}:latest -q)
+            sudo docker rmi -f $(docker images  ${{ secrets.REGISTRY }}:latest -q)
+            sudo docker login --username=${{ secrets.USERNAME }} --password ${{ secrets.PASSWORD }} registry.cn-hangzhou.aliyuncs.com
+            sudo docker pull ${{ secrets.REGISTRY }}:latest
+            sudo docker run -d -p 9033:9033 ${{ secrets.REGISTRY }}:latest
