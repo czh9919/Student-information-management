@@ -31,6 +31,10 @@ public class AdminController{
     @ApiOperation(value="register")
     @PostMapping(value = "/register")
     public boolean register(@RequestBody AdminUser admin){
+        if (admin.getName()==null||admin.getPassword()==null)
+        {
+            return false;
+        }
         adminDao.register(admin.getName(), admin.getPassword());
         return true;
     }
@@ -59,16 +63,16 @@ public class AdminController{
     }
     @ApiOperation(value ="check")
     @RequestMapping(value="/check",method=RequestMethod.POST)
-    public boolean check(@RequestBody ResultCheck res){
-        if (res.getToken()==""||res.getToken()==null) {
+    public boolean check(@RequestBody AdminUser admin){
+        if (admin.getStatus()==null||admin.getStatus()==""||admin.getName()==""||admin.getName()==null)
             return false;
-        }
-        System.out.println(res.getToken());
         AdminUser adminuser;
-        adminuser = adminDao.checkStatus("admin");
-        int checkToken = adminuser.getStatus();
-        String token = checkToken+"";
-        if(res.getToken().contains(token)){
+        System.out.println(admin.getName());
+        adminuser = adminDao.checkStatus(admin.getName());
+        String checkToken = adminuser.getStatus();
+        System.out.println(admin.getName());
+        System.out.println(admin.getStatus().equals(checkToken));
+        if(admin.getStatus().equals(checkToken)){
             return true;
 
         }else{

@@ -21,7 +21,7 @@ public interface AdminDao{
      * @param number
      * @return
      */
-    int updateLoginToken(String name,int number);
+    int updateLoginToken(String name,String number);
     /**
      * 返回数据列表
      * @param name
